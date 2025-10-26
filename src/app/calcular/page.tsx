@@ -10,7 +10,7 @@ export default function CalcularPage() {
   const [vector, setVector] = useState<string>("[1,0,0,0]");
   const [steps, setSteps] = useState<number>(3);
   const [validResult, setValidResult] = useState<ValidarResponse | null>(null);
-  const [calcResult, setCalcResult] = useState<number[][] | null>(null);
+  const [calcResult, setCalcResult] = useState<number[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,12 +19,18 @@ export default function CalcularPage() {
       setError(null);
       setValidResult(null);
       setCalcResult(null);
+      
+      const matrixParsed = JSON.parse(matrix);
 
       const res = await fetch("https://backend-markov.onrender.com/validar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ matrix_p: JSON.parse(matrix) }),
+        body: JSON.stringify({ matrix_p: matrixParsed}),
       });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
 
       const data = (await res.json()) as ValidarResponse;
       setValidResult(data);
@@ -48,26 +54,31 @@ export default function CalcularPage() {
       setError(null);
       setCalcResult(null);
 
+      const matrixParsed = JSON.parse(matrix);
+      const vectorParsed = JSON.parse(vector);
+
       const res = await fetch("https://backend-markov.onrender.com/calcular", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          matrix_p: JSON.parse(matrix),
-          vector_v: JSON.parse(vector),
+          matrix_p: matrixParsed,
+          vector_v: vectorParsed,
           steps,
         }),
       });
 
       const data = (await res.json()) as CalcularResponse;
       // Convertimos solo la matriz final en array de arrays
-      setCalcResult(data.final_result);
+      setCalcResult(data.final_result.flat());
     } catch {
       setError(" Error al calcular la cadena de Markov");
     } finally {
       setLoading(false);
     }
   };
-
+  
+  const formatVector = (vec: number[]) =>
+    vec.map((v) => v.toFixed(4)).join("\n");
   const formatMatrix = (mat: number[][]) =>
     mat.map((row) => row.map((v) => v.toFixed(4)).join("  ")).join("\n");
 
