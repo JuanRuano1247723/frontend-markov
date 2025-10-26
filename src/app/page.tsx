@@ -10,7 +10,7 @@ export default function HomePage() {
 
   const checkHealth = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:5000/health");
+      const res = await fetch("https://backend-markov.onrender.com/health");
       const data = (await res.json()) as HealthResponse;
       setStatus(data);
       setError(null);

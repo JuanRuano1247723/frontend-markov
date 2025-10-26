@@ -20,7 +20,7 @@ export default function CalcularPage() {
       setValidResult(null);
       setCalcResult(null);
 
-      const res = await fetch("http://127.0.0.1:5000/validar", {
+      const res = await fetch("https://backend-markov.onrender.com/validar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ matrix_p: JSON.parse(matrix) }),
@@ -48,7 +48,7 @@ export default function CalcularPage() {
       setError(null);
       setCalcResult(null);
 
-      const res = await fetch("http://127.0.0.1:5000/calcular", {
+      const res = await fetch("https://backend-markov.onrender.com/calcular", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
