@@ -1,0 +1,63 @@
+.terminaAbout-container {
+  padding: 60px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.ascii-title {
+  color: #4ec57e;
+  font-family: "Courier New", monospace;
+  text-align: center;
+  white-space: pre;
+  font-size: 20px;
+  text-shadow: 0 0 8px #4ec57e;
+  margin-bottom: 20px;
+}
+
+.about-title {
+  color: #4ec57e;
+  text-align: center;
+  font-family: "Courier New", monospace;
+  text-shadow: 0 0 10px #4ec57e;
+}
+
+.about-subtitle {
+  color: #4ec57e;
+  font-family: "Courier New", monospace;
+  margin-top: 20px;
+  text-decoration: underline;
+}
+
+.about-text {
+  color: #4ec57e;
+  font-family: "Courier New", monospace;
+  margin-top: 15px;
+  line-height: 1.6;
+}
+
+.about-list {
+  color: #4ec57e;
+  font-family: "Courier New", monospace;
+  margin-left: 30px;
+  margin-top: 10px;
+  line-height: 1.5;
+  list-style-type: "► ";
+}
+
+.about-box {
+  border: 2px solid #4ec57e;
+  box-shadow: 0 0 8px #4ec57e;
+  padding: 15px;
+  margin-top: 25px;
+  font-family: "Courier New", monospace;
+  color: #4ec57e;
+}
+
+.about-footer {
+  text-align: center;
+  margin-top: 40px;
+  font-family: "Courier New", monospace;
+  color: #3cb871;
+  font-style: italic;
+}

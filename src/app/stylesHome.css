@@ -1,0 +1,89 @@
+.terminal2 {
+  background-color: #000;
+  color: #4ec57e;
+  font-family: "Courier New", monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.ascii-logo2 {
+  color: #4ec57e;
+  text-shadow: 0 0 8px #4ec57e;
+  font-size: 25px;
+  line-height: 1.2;
+  margin-bottom: 40px;
+  white-space: pre;
+}
+
+.content2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.terminal-button2 {
+  border: 2px solid #4ec57e;
+  color: #4ec57e;
+  font-family: inherit;
+  font-size: 16px;
+  padding: 8px 20px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  box-shadow: 0 0 8px #4ec57e;
+  background: rgba(0, 255, 100, 0.1);
+}
+
+.terminal-button2:hover {
+  background-color: #4ec57e;
+  color: #000;
+  box-shadow: 0 0 20px #4ec57e;
+}
+
+.status-box2 {
+  background: rgba(0, 255, 100, 0.1);
+  border: 1px solid #4ec57e;
+  padding: 15px;
+  width: 300px;
+  box-shadow: 0 0 8px #4ec57e;
+  text-align: left;
+  animation: flicker 1.5s infinite alternate;
+}
+
+.error2 {
+  color: #ff3333;
+  text-shadow: 0 0 6px #ff3333;
+}
+
+@keyframes flicker {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+.terminal-body {
+  background-color: #000;
+  color: #4ec57e;
+  font-family: "Courier New", monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Zona principal centrada, sin interferir con el NavBar o Footer */
+.terminal-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}

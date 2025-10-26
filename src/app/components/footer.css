@@ -1,0 +1,21 @@
+.terminal-footer {
+  background-color: #000;
+  color: #4ec57e;
+  font-family: "Courier New", monospace;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.footer-line {
+  border: none;
+  border-top: 2px solid #4ec57e;
+  box-shadow: 0 0 8px #4ec57e;
+  margin-bottom: 10px;
+}
+
+.footer-text {
+  font-size: 14px;
+  text-shadow: 0 0 4px #4ec57e;
+}
