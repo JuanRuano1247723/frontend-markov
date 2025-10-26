@@ -164,7 +164,7 @@ Cadenas de Markov. ████████████████████�
     {calcResult && (
       <div className="status-box">
         <p>Resultado final después de {steps} pasos:</p>
-        <pre>{formatMatrix(calcResult)}</pre>
+        <pre>{formatVector(calcResult)}</pre>
       </div>
     )}
   </div>
