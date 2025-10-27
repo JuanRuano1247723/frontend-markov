@@ -14,10 +14,38 @@ export interface ValidarResponse {
 export interface CalcularResponse {
   success: boolean;
   final_result: number[][];
+  intermediate_steps: StepDetail[];
   total_steps: number;
   input_dimensions: {
     matrix_p: number[];
     vector_v: number[];
   };
-  intermediate_steps?: any[];
+}
+
+export interface StepDetail {
+  step: number;
+  input_vector: number[];
+  operations: Operation[];
+  sums: SumDetail[];
+  result: number[];
+}
+
+export interface Operation {
+  row: number;
+  multiplications: Multiplication[];
+  expression: string;
+}
+
+export interface Multiplication {
+  matrix_value: number;
+  vector_value: number;
+  product: number;
+  expression: string;
+}
+
+export interface SumDetail {
+  row: number;
+  terms: number[];
+  expression: string;
+  total: number;
 }

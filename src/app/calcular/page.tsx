@@ -8,9 +8,9 @@ export default function CalcularPage() {
     "[[0.8,0.1,0.1,0.0],[0.6,0.3,0.1,0.0],[0.2,0.3,0.4,0.1],[0.0,0.1,0.4,0.5]]"
   );
   const [vector, setVector] = useState<string>("[1,0,0,0]");
-  const [steps, setSteps] = useState<number>(3);
+  const [steps, setSteps] = useState<number>(10);
   const [validResult, setValidResult] = useState<ValidarResponse | null>(null);
-  const [calcResult, setCalcResult] = useState<number[] | null>(null);
+  const [calcResult, setCalcResult] = useState<CalcularResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -69,7 +69,7 @@ export default function CalcularPage() {
 
       const data = (await res.json()) as CalcularResponse;
       // Convertimos solo la matriz final en array de arrays
-      setCalcResult(data.final_result.flat());
+      setCalcResult(data);
     } catch {
       setError(" Error al calcular la cadena de Markov");
     } finally {
@@ -79,8 +79,6 @@ export default function CalcularPage() {
   
   const formatVector = (vec: number[]) =>
     vec.map((v) => v.toFixed(4)).join("\n");
-  const formatMatrix = (mat: number[][]) =>
-    mat.map((row) => row.map((v) => v.toFixed(4)).join("  ")).join("\n");
 
   return (
   <div className="terminal">
@@ -162,12 +160,64 @@ Cadenas de Markov. ████████████████████�
     )}
 
     {calcResult && (
-      <div className="status-box">
-        <p>Resultado final después de {steps} pasos:</p>
-        <pre>{formatVector(calcResult)}</pre>
-      </div>
-    )}
-  </div>
+      <>
+        <div className="status-box">
+          <p>Resultado final para el día {steps}:</p>
+          <pre>{formatVector(calcResult.final_result.flat())}</pre>
+        </div>
+      
+        <div className="steps-container">
+            <h3 className="steps-title"> Pasos Detallados del Cálculo</h3>
+            
+            {calcResult.intermediate_steps.map((step, index) => (
+              <div key={index} className="step-box">
+                <h4 className="step-header">
+                  ═══════════════════════════════════════════════════════
+                  <br />
+                  PASO {step.step} de {steps}
+                  <br />
+                  ═══════════════════════════════════════════════════════
+                </h4>
+
+                {/* 1. Multiplicación Fila × Columna */}
+                <div className="step-section">
+                  <p className="step-subtitle">1. MULTIPLICACIÓN FILA × COLUMNA:</p>
+                  <div className="step-content">
+                    {step.operations.map((op, i) => (
+                      <p key={i} className="operation-line">
+                        Fila {op.row}: [{op.expression}]
+                      </p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 2. Operando (Productos) */}
+                <div className="step-section">
+                  <p className="step-subtitle">2. OPERANDO (PRODUCTOS):</p>
+                  <div className="step-content">
+                    {step.sums.map((sum, i) => (
+                      <p key={i} className="operation-line">
+                        Fila {sum.row}: [{sum.expression}] = {sum.total.toFixed(4)}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 3. Resultado */}
+                <div className="step-section">
+                  <p className="step-subtitle">3. RESULTADO:</p>
+                  <div className="step-content">
+                    <pre className="result-vector">
+                      {step.result.map((val, i) => `[${val.toFixed(4)}]`).join('\n')}
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
 );
 
 }
